@@ -1,0 +1,126 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      th,
+      table,
+      td {
+        min-width: 50px;
+        padding: 5px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="data-table">
+      <tr>
+        <th>Nome do Projeto</th>
+        <th>Bot ID</th>
+        <th>Tipo de Contrato</th>
+        <th>Indicador</th>
+        <th>Mês-3</th>
+        <th>Mês-2</th>
+        <th>Mês-1</th>
+        <th>Mês atual</th>
+      </tr>
+      <tbody></tbody>
+    </table>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script>
+    axios
+      .get("http://localhost:3000/report")
+      .then((response) => {
+        dynamicList(response.data);
+      })
+      .catch((error) => console.log(error));
+    const calendar = new Date();
+    let monthValue = calendar.getMonth() + 1;
+
+    const dynamicList = (bots) => {
+      const ulBots = document.getElementById("data-table");
+      bots.map((bot) => {
+        for (let i = 0; i < 3; i++) {
+          const newCell = document.createElement("tr");
+          const botName = document.createElement("td");
+          const botID = document.createElement("td");
+          const contract = document.createElement("td");
+          const indicator = document.createElement("td");
+          const month3 = document.createElement("td");
+          const month2 = document.createElement("td");
+          const month1 = document.createElement("td");
+          const monthActual = document.createElement("td");
+          botName.innerHTML = bot.bot_name;
+          botID.innerHTML = bot.bot_id;
+          contract.innerHTML =
+            bot.customer_contract_type == undefined
+              ? "--"
+              : bot.customer_contract_type;
+          switch (i) {
+            case 0:
+              indicator.innerHTML = "Quantidade de Atendimentos Total";
+              month3.innerHTML =
+                bot.month[3] == undefined ? 0 : bot.month[3].total;
+              month2.innerHTML =
+                bot.month[2] == undefined ? 0 : bot.month[2].total;
+              month1.innerHTML =
+                bot.month[1] == undefined ? 0 : bot.month[1].total;
+              monthActual.innerHTML =
+                bot.month[0] == undefined ? 0 : bot.month[0].total;
+              break;
+            case 1:
+              indicator.innerHTML = "Quantidade de Atendimentos via Whatsapp";
+              month3.innerHTML =
+                bot.month[3] == undefined ? 0 : bot.month[3].whatsapp;
+              month2.innerHTML =
+                bot.month[2] == undefined ? 0 : bot.month[2].whatsapp;
+              month1.innerHTML =
+                bot.month[1] == undefined ? 0 : bot.month[1].whatsapp;
+              monthActual.innerHTML =
+                bot.month[0] == undefined ? 0 : bot.month[0].whatsapp;
+              break;
+            case 2:
+              indicator.innerHTML = "Quantidade de IDKs";
+              month3.innerHTML =
+                bot.month[3] == undefined
+                  ? 0
+                  : bot.month[3].idk == undefined
+                  ? 0
+                  : bot.month[3].idk;
+              month2.innerHTML =
+                bot.month[2] == undefined
+                  ? 0
+                  : bot.month[2].idk == undefined
+                  ? 0
+                  : bot.month[2].idk;
+              month1.innerHTML =
+                bot.month[1] == undefined
+                  ? 0
+                  : bot.month[1].idk == undefined
+                  ? 0
+                  : bot.month[1].idk;
+              monthActual.innerHTML =
+                bot.month[0] == undefined
+                  ? 0
+                  : bot.month[0].idk == undefined
+                  ? 0
+                  : bot.month[0].idk;
+              break;
+          }
+          ulBots.appendChild(newCell);
+          newCell.appendChild(botName);
+          newCell.appendChild(botID);
+          newCell.appendChild(contract);
+          newCell.appendChild(indicator);
+          newCell.appendChild(month3);
+          newCell.appendChild(month2);
+          newCell.appendChild(month1);
+          newCell.appendChild(monthActual);
+        }
+      });
+    };
+  </script>
+</html>
