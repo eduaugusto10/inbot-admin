@@ -5,6 +5,9 @@ const ReportController = require('../controllers/ReportController')
 const router = express.Router()
 
 router.get('/report', new ReportController().getAll)
+router.get('/home', function (req, res) {
+    res.sendFile(path.join(__dirname, '../pages/home.html'))
+})
 router.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '../pages/index.html'));
 });
