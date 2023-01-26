@@ -15,6 +15,32 @@
     </style>
   </head>
   <body>
+    <input
+      type="text"
+      id="input-search"
+      onkeyup="search()"
+      placeholder="Digite o nome ou id"
+    />
+    <div>
+      <div>
+        <input
+          type="checkbox"
+          id="bot-enable"
+          onclick="search()"
+          checked="checked"
+        />
+        <label>Ativo</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="bot-disable"
+          onclick="search()"
+          checked="checked"
+        />
+        <label>Inativo</label>
+      </div>
+    </div>
     <table id="data-table">
       <tr>
         <th>Nome do Projeto</th>
@@ -31,9 +57,11 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script>
+    var resp = [];
     axios
       .get("http://localhost:3000/report")
       .then((response) => {
+        resp = response.data;
         dynamicList(response.data);
       })
       .catch((error) => console.log(error));
@@ -121,5 +149,28 @@
         }
       });
     };
+    function search() {
+      let obj = resp;
+      var botsEnable = document.getElementById("bot-enable").checked;
+      var botsDisable = document.getElementById("bot-disable").checked;
+      if (botsEnable === true && botsDisable === false) {
+        obj = obj.filter((item) => item.bot_active === "1");
+      }
+      if (botsEnable === false && botsDisable === true) {
+        obj = obj.filter((item) => item.bot_active === "0");
+      }
+      if (botsEnable === false && botsDisable === false) {
+        obj = [];
+      }
+
+      var element = document.getElementsByTagName("tr");
+      for (index = element.length - 1; index >= 0; index--) {
+        element[index].parentNode.removeChild(element[index]);
+      }
+      let query = document.getElementById("input-search").value;
+      const regex = new RegExp(query, "gi");
+      obj = obj.filter((item) => item.bot_name.match(regex));
+      dynamicList(obj);
+    }
   </script>
 </html>
