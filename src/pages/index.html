@@ -23,17 +23,17 @@
       onkeyup="search()"
       placeholder="Digite o nome ou id"
     />
-    <div>
+    <form>
       <input
         id="project-radio"
         type="radio"
+        name="search-radio"
         checked
-        onclick="radioChecked()"
       /><label>Nome do Projeto</label>
-      <input id="bot-id-radio" type="radio" onclick="radioChecked()" /><label
+      <input id="bot-id-radio" type="radio" name="search-radio" /><label
         >Bot ID</label
       >
-    </div>
+    </form>
     <div>
       <div>
         <input
@@ -201,11 +201,6 @@
       obj = obj.filter((item) => item.bot_name.match(regex));
       // obj = obj.filter((item) => item.bot_id.toString().match(regex));
       dynamicList(obj);
-    }
-
-    function radioChecked() {
-      document.getElementById("project-radio").checked == false ? true : false;
-      document.getElementById("bot-id-radio").checked == false ? true : false;
     }
   </script>
 </html>
