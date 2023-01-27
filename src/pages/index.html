@@ -198,8 +198,8 @@
       }
       let query = document.getElementById("input-search").value;
       const regex = new RegExp(query, "gi");
-      // obj = obj.filter((item) => item.bot_name.match(regex));
-      obj = obj.filter((item) => item.bot_id.toString().match(regex));
+      obj = obj.filter((item) => item.bot_name.match(regex));
+      // obj = obj.filter((item) => item.bot_id.toString().match(regex));
       dynamicList(obj);
     }
 
