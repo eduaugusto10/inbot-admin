@@ -29,10 +29,14 @@
         type="radio"
         name="search-radio"
         checked
+        onclick="search()"
       /><label>Nome do Projeto</label>
-      <input id="bot-id-radio" type="radio" name="search-radio" /><label
-        >Bot ID</label
-      >
+      <input
+        id="bot-id-radio"
+        type="radio"
+        name="search-radio"
+        onclick="search()"
+      /><label>Bot ID</label>
     </form>
     <div>
       <div>
@@ -180,6 +184,7 @@
     };
     function search() {
       let obj = resp;
+      const radioStatus = document.getElementById("project-radio").checked;
       var botsEnable = document.getElementById("bot-enable").checked;
       var botsDisable = document.getElementById("bot-disable").checked;
       if (botsEnable === true && botsDisable === false) {
@@ -198,8 +203,9 @@
       }
       let query = document.getElementById("input-search").value;
       const regex = new RegExp(query, "gi");
-      obj = obj.filter((item) => item.bot_name.match(regex));
-      // obj = obj.filter((item) => item.bot_id.toString().match(regex));
+      if (radioStatus == true)
+        obj = obj.filter((item) => item.bot_name.match(regex));
+      else obj = obj.filter((item) => item.bot_id.toString().match(regex));
       dynamicList(obj);
     }
   </script>
