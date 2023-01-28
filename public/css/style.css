@@ -1,0 +1,24 @@
+th,
+table,
+td {
+  padding: 5px;
+  border: 1px solid #000;
+}
+table {
+  width: 90vw;
+}
+input {
+  margin: 0.4em;
+}
+#input-search {
+  width: 25em;
+  height: 3em;
+  padding-left: 8px;
+}
+#bot-name {
+  width: 300px;
+}
+#search-container {
+  display: flex;
+  flex-direction: row;
+}
