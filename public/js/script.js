@@ -29,10 +29,10 @@ const dynamicList = (bots) => {
         id.innerHTML = "Bot ID";
         contract.innerHTML = "Tipo de Contrato";
         indicator.innerHTML = "Indicador";
-        m3.innerHTML = monthByName(3) //"Mês - 3";
-        m2.innerHTML = monthByName(2) //"Mês - 2";
-        m1.innerHTML = monthByName(1) // "Mês - 1";
-        m0.innerHTML = monthByName(0)  //"Mês Atual";
+        m3.innerHTML = monthByName(3) //"Current month - 3";
+        m2.innerHTML = monthByName(2) //"Current month - 2";
+        m1.innerHTML = monthByName(1) // "Current month - 1";
+        m0.innerHTML = monthByName(0)  //"Current month";
         tableBots.appendChild(name);
         tableBots.appendChild(id);
         tableBots.appendChild(contract);
@@ -61,51 +61,51 @@ const dynamicList = (bots) => {
                 case 0:
                     indicator.innerHTML = "Quantidade de Atendimentos Total";
                     month3.innerHTML =
-                        bot.month[3] == undefined ? 0 : bot.month[3].total;
+                        bot.months[3] == undefined ? 0 : bot.months[3].total == undefined ? 0 : bot.months[3].total;
                     month2.innerHTML =
-                        bot.month[2] == undefined ? 0 : bot.month[2].total;
+                        bot.months[2] == undefined ? 0 : bot.months[2].total == undefined ? 0 : bot.months[2].total;
                     month1.innerHTML =
-                        bot.month[1] == undefined ? 0 : bot.month[1].total;
+                        bot.months[1] == undefined ? 0 : bot.months[1].total == undefined ? 0 : bot.months[1].total;
                     monthActual.innerHTML =
-                        bot.month[0] == undefined ? 0 : bot.month[0].total;
+                        bot.months[0] == undefined ? 0 : bot.months[0].total == undefined ? 0 : bot.months[0].total;
                     break;
                 case 1:
                     indicator.innerHTML = "Quantidade de Atendimentos via Whatsapp";
                     month3.innerHTML =
-                        bot.month[3] == undefined ? 0 : bot.month[3].whatsapp;
+                        bot.months[3] == undefined ? 0 : bot.months[3].whatsapp == undefined ? 0 : bot.months[3].whatsapp;
                     month2.innerHTML =
-                        bot.month[2] == undefined ? 0 : bot.month[2].whatsapp;
+                        bot.months[2] == undefined ? 0 : bot.months[2].whatsapp == undefined ? 0 : bot.months[2].whatsapp;
                     month1.innerHTML =
-                        bot.month[1] == undefined ? 0 : bot.month[1].whatsapp;
+                        bot.months[1] == undefined ? 0 : bot.months[1].whatsapp == undefined ? 0 : bot.months[1].whatsapp;
                     monthActual.innerHTML =
-                        bot.month[0] == undefined ? 0 : bot.month[0].whatsapp;
+                        bot.months[0] == undefined ? 0 : bot.months[0].whatsapp == undefined ? 0 : bot.months[0].whatsapp;
                     break;
                 case 2:
                     indicator.innerHTML = "Quantidade de IDKs";
                     month3.innerHTML =
-                        bot.month[3] == undefined
+                        bot.months[3] == undefined
                             ? 0
-                            : bot.month[3].idk == undefined
+                            : bot.months[3].idk == undefined
                                 ? 0
-                                : bot.month[3].idk;
+                                : bot.months[3].idk;
                     month2.innerHTML =
-                        bot.month[2] == undefined
+                        bot.months[2] == undefined
                             ? 0
-                            : bot.month[2].idk == undefined
+                            : bot.months[2].idk == undefined
                                 ? 0
-                                : bot.month[2].idk;
+                                : bot.months[2].idk;
                     month1.innerHTML =
-                        bot.month[1] == undefined
+                        bot.months[1] == undefined
                             ? 0
-                            : bot.month[1].idk == undefined
+                            : bot.months[1].idk == undefined
                                 ? 0
-                                : bot.month[1].idk;
+                                : bot.months[1].idk;
                     monthActual.innerHTML =
-                        bot.month[0] == undefined
+                        bot.months[0] == undefined
                             ? 0
-                            : bot.month[0].idk == undefined
+                            : bot.months[0].idk == undefined
                                 ? 0
-                                : bot.month[0].idk;
+                                : bot.months[0].idk;
                     break;
             }
             tableBots.appendChild(newCell);
