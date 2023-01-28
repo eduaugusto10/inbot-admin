@@ -29,10 +29,10 @@ const dynamicList = (bots) => {
         id.innerHTML = "Bot ID";
         contract.innerHTML = "Tipo de Contrato";
         indicator.innerHTML = "Indicador";
-        m3.innerHTML = "Mês - 3";
-        m2.innerHTML = "Mês - 2";
-        m1.innerHTML = "Mês - 1";
-        m0.innerHTML = "Mês Atual";
+        m3.innerHTML = monthByName(3) //"Mês - 3";
+        m2.innerHTML = monthByName(2) //"Mês - 2";
+        m1.innerHTML = monthByName(1) // "Mês - 1";
+        m0.innerHTML = monthByName(0)  //"Mês Atual";
         tableBots.appendChild(name);
         tableBots.appendChild(id);
         tableBots.appendChild(contract);
@@ -157,4 +157,12 @@ function newQuery(obj) {
         obj = obj.filter((item) => item.bot_name.match(regex));
     else obj = obj.filter((item) => item.bot_id.toString().match(regex));
     return obj;
+}
+
+function monthByName(monthID) {
+    let date = new Date()
+    let sumDate = date.getMonth() - monthID
+    date.setMonth(sumDate)
+    const month = date.toLocaleString('default', { month: '2-digit', year: '2-digit' })
+    return month
 }
