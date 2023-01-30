@@ -4,7 +4,7 @@ module.exports = {
     getAllBots: () => {
         return new Promise((accept, reject) => {
             db.query("select bots_view.bot_id, bots_view.bot_name, bots_view.bot_active, bots_view.bot_customer_paid,"
-                + " bots_view.bot_customer_contract_type  from bots_view where bots_view.bot_is_small_company='1's order by bots_view.bot_name asc;"//
+                + " bots_view.bot_customer_contract_type  from bots_view where bots_view.bot_is_small_company='1' order by bots_view.bot_name asc;"//
                 , (error, results) => {
                     if (error) {
                         reject(error);
