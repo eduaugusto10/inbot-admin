@@ -1,8 +1,6 @@
-
-
 let resp = [];
 axios
-    .get("http://localhost:3000/report")
+    .get("https://hsm-dev.in.bot/api/report")
     .then((response) => {
         resp = response.data;
         dynamicList(response.data);
@@ -24,15 +22,15 @@ const dynamicList = (bots) => {
         const m2 = document.createElement("th");
         const m1 = document.createElement("th");
         const m0 = document.createElement("th");
-        name.id = "bot-name"
+        name.id = "bot-name";
         name.innerHTML = "Nome do Projeto";
         id.innerHTML = "Bot ID";
         contract.innerHTML = "Tipo de Contrato";
         indicator.innerHTML = "Indicador";
-        m3.innerHTML = monthByName(3) //"Current month - 3";
-        m2.innerHTML = monthByName(2) //"Current month - 2";
-        m1.innerHTML = monthByName(1) // "Current month - 1";
-        m0.innerHTML = monthByName(0)  //"Current month";
+        m3.innerHTML = monthByName(3); //"Current month - 3";
+        m2.innerHTML = monthByName(2); //"Current month - 2";
+        m1.innerHTML = monthByName(1); // "Current month - 1";
+        m0.innerHTML = monthByName(0); //"Current month";
         tableBots.appendChild(name);
         tableBots.appendChild(id);
         tableBots.appendChild(contract);
@@ -60,24 +58,84 @@ const dynamicList = (bots) => {
             switch (i) {
                 case 0:
                     indicator.innerHTML = "Quantidade de Atendimentos Total";
-                    month3.innerHTML = bot.months[3] == undefined ? 0 : bot.months[3].total == undefined ? 0 : bot.months[3].total;
-                    month2.innerHTML = bot.months[2] == undefined ? 0 : bot.months[2].total == undefined ? 0 : bot.months[2].total;
-                    month1.innerHTML = bot.months[1] == undefined ? 0 : bot.months[1].total == undefined ? 0 : bot.months[1].total;
-                    monthActual.innerHTML = bot.months[0] == undefined ? 0 : bot.months[0].total == undefined ? 0 : bot.months[0].total;
+                    month3.innerHTML =
+                        bot.months[3] == undefined
+                            ? 0
+                            : bot.months[3].total == undefined
+                                ? 0
+                                : bot.months[3].total;
+                    month2.innerHTML =
+                        bot.months[2] == undefined
+                            ? 0
+                            : bot.months[2].total == undefined
+                                ? 0
+                                : bot.months[2].total;
+                    month1.innerHTML =
+                        bot.months[1] == undefined
+                            ? 0
+                            : bot.months[1].total == undefined
+                                ? 0
+                                : bot.months[1].total;
+                    monthActual.innerHTML =
+                        bot.months[0] == undefined
+                            ? 0
+                            : bot.months[0].total == undefined
+                                ? 0
+                                : bot.months[0].total;
                     break;
                 case 1:
                     indicator.innerHTML = "Quantidade de Atendimentos via Whatsapp";
-                    month3.innerHTML = bot.months[3] == undefined ? 0 : bot.months[3].whatsapp == undefined ? 0 : bot.months[3].whatsapp;
-                    month2.innerHTML = bot.months[2] == undefined ? 0 : bot.months[2].whatsapp == undefined ? 0 : bot.months[2].whatsapp;
-                    month1.innerHTML = bot.months[1] == undefined ? 0 : bot.months[1].whatsapp == undefined ? 0 : bot.months[1].whatsapp;
-                    monthActual.innerHTML = bot.months[0] == undefined ? 0 : bot.months[0].whatsapp == undefined ? 0 : bot.months[0].whatsapp;
+                    month3.innerHTML =
+                        bot.months[3] == undefined
+                            ? 0
+                            : bot.months[3].whatsapp == undefined
+                                ? 0
+                                : bot.months[3].whatsapp;
+                    month2.innerHTML =
+                        bot.months[2] == undefined
+                            ? 0
+                            : bot.months[2].whatsapp == undefined
+                                ? 0
+                                : bot.months[2].whatsapp;
+                    month1.innerHTML =
+                        bot.months[1] == undefined
+                            ? 0
+                            : bot.months[1].whatsapp == undefined
+                                ? 0
+                                : bot.months[1].whatsapp;
+                    monthActual.innerHTML =
+                        bot.months[0] == undefined
+                            ? 0
+                            : bot.months[0].whatsapp == undefined
+                                ? 0
+                                : bot.months[0].whatsapp;
                     break;
                 case 2:
                     indicator.innerHTML = "Quantidade de IDKs";
-                    month3.innerHTML = bot.months[3] == undefined ? 0 : bot.months[3].idk == undefined ? 0 : bot.months[3].idk;
-                    month2.innerHTML = bot.months[2] == undefined ? 0 : bot.months[2].idk == undefined ? 0 : bot.months[2].idk;
-                    month1.innerHTML = bot.months[1] == undefined ? 0 : bot.months[1].idk == undefined ? 0 : bot.months[1].idk;
-                    monthActual.innerHTML = bot.months[0] == undefined ? 0 : bot.months[0].idk == undefined ? 0 : bot.months[0].idk;
+                    month3.innerHTML =
+                        bot.months[3] == undefined
+                            ? 0
+                            : bot.months[3].idk == undefined
+                                ? 0
+                                : bot.months[3].idk;
+                    month2.innerHTML =
+                        bot.months[2] == undefined
+                            ? 0
+                            : bot.months[2].idk == undefined
+                                ? 0
+                                : bot.months[2].idk;
+                    month1.innerHTML =
+                        bot.months[1] == undefined
+                            ? 0
+                            : bot.months[1].idk == undefined
+                                ? 0
+                                : bot.months[1].idk;
+                    monthActual.innerHTML =
+                        bot.months[0] == undefined
+                            ? 0
+                            : bot.months[0].idk == undefined
+                                ? 0
+                                : bot.months[0].idk;
                     break;
             }
             tableBots.appendChild(newCell);
@@ -97,17 +155,9 @@ const dynamicList = (bots) => {
 function search() {
     let obj = resp;
 
-    let botsEnable = document.getElementById("bot-enable").checked;
-    let botsDisable = document.getElementById("bot-disable").checked;
-    if (botsEnable === true && botsDisable === false) {
-        obj = obj.filter((item) => item.bot_active === "1");
-    }
-    if (botsEnable === false && botsDisable === true) {
-        obj = obj.filter((item) => item.bot_active === "0");
-    }
-    if (botsEnable === false && botsDisable === false) {
-        obj = [];
-    }
+    obj = statusBot(obj);
+
+    obj = subscribers(obj);
 
     removeChild();
     obj = newQuery(obj);
@@ -132,9 +182,42 @@ function newQuery(obj) {
 }
 
 function monthByName(monthID) {
-    let date = new Date()
-    let sumDate = date.getMonth() - monthID
-    date.setMonth(sumDate)
-    const month = date.toLocaleString('default', { month: '2-digit', year: '2-digit' })
-    return month
+    let date = new Date();
+    let sumDate = date.getMonth() - monthID;
+    date.setMonth(sumDate);
+    const month = date.toLocaleString("default", {
+        month: "2-digit",
+        year: "2-digit",
+    });
+    return month;
+}
+
+function subscribers(objSub) {
+    const subscriber = document.getElementById("subscriber").checked;
+    const nonSubscriber = document.getElementById("non-subscriber").checked;
+    if (subscriber === true && nonSubscriber === false) {
+        objSub = objSub.filter((item) => item.bot_customer_paid === "1");
+    }
+    if (subscriber === false && nonSubscriber === true) {
+        objSub = objSub.filter((item) => item.bot_customer_paid === "0");
+    }
+    if (subscriber === false && nonSubscriber === false) {
+        objSub = [];
+    }
+    return objSub;
+}
+
+function statusBot(objStatus) {
+    let botsEnable = document.getElementById("bot-enable").checked;
+    let botsDisable = document.getElementById("bot-disable").checked;
+    if (botsEnable === true && botsDisable === false) {
+        objStatus = objStatus.filter((item) => item.bot_active === "1");
+    }
+    if (botsEnable === false && botsDisable === true) {
+        objStatus = objStatus.filter((item) => item.bot_active === "0");
+    }
+    if (botsEnable === false && botsDisable === false) {
+        objStatus = [];
+    }
+    return objStatus;
 }
