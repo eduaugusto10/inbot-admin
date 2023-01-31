@@ -81,6 +81,29 @@
           </div>
         </div>
       </fieldset>
+      <fieldset>
+        <legend>Assinante</legend>
+        <div>
+          <div>
+            <input
+              type="checkbox"
+              id="subscriber"
+              onclick="search()"
+              checked="checked"
+            />
+            <label>Sim</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="non-subscriber"
+              onclick="search()"
+              checked="checked"
+            />
+            <label>Não</label>
+          </div>
+        </div>
+      </fieldset>
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
@@ -242,17 +265,9 @@
     function search() {
       let obj = resp;
 
-      let botsEnable = document.getElementById("bot-enable").checked;
-      let botsDisable = document.getElementById("bot-disable").checked;
-      if (botsEnable === true && botsDisable === false) {
-        obj = obj.filter((item) => item.bot_active === "1");
-      }
-      if (botsEnable === false && botsDisable === true) {
-        obj = obj.filter((item) => item.bot_active === "0");
-      }
-      if (botsEnable === false && botsDisable === false) {
-        obj = [];
-      }
+      obj = statusBot(obj);
+
+      obj = subscribers(obj);
 
       removeChild();
       obj = newQuery(obj);
@@ -285,6 +300,36 @@
         year: "2-digit",
       });
       return month;
+    }
+
+    function subscribers(objSub) {
+      const subscriber = document.getElementById("subscriber").checked;
+      const nonSubscriber = document.getElementById("non-subscriber").checked;
+      if (subscriber === true && nonSubscriber === false) {
+        objSub = objSub.filter((item) => item.bot_customer_paid === "1");
+      }
+      if (subscriber === false && nonSubscriber === true) {
+        objSub = objSub.filter((item) => item.bot_customer_paid === "0");
+      }
+      if (subscriber === false && nonSubscriber === false) {
+        objSub = [];
+      }
+      return objSub;
+    }
+
+    function statusBot(objStatus) {
+      let botsEnable = document.getElementById("bot-enable").checked;
+      let botsDisable = document.getElementById("bot-disable").checked;
+      if (botsEnable === true && botsDisable === false) {
+        objStatus = objStatus.filter((item) => item.bot_active === "1");
+      }
+      if (botsEnable === false && botsDisable === true) {
+        objStatus = objStatus.filter((item) => item.bot_active === "0");
+      }
+      if (botsEnable === false && botsDisable === false) {
+        objStatus = [];
+      }
+      return objStatus;
     }
   </script>
 </html>

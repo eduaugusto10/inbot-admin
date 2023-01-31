@@ -5,9 +5,13 @@ class ReportController {
         const reportService = new ReportService()
         try {
             const data = await reportService.getAll()
+            if (data.statusCode == 500) {
+                console.log(data)
+                res.status(500).json(data)
+            }
             res.json(data)
         } catch (error) {
-            res.json({ message: 'Error' })
+            res.json({ message: 'Server internal error' })
         }
     }
 }

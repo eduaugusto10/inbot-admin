@@ -7,8 +7,7 @@ module.exports = {
                 + " bots_view.bot_customer_contract_type  from bots_view where bots_view.bot_is_small_company='1' order by bots_view.bot_name asc;"//
                 , (error, results) => {
                     if (error) {
-                        reject(error);
-                        return;
+                        return reject("Request getAllBots error");
                     }
                     accept(results);
                 });
@@ -21,8 +20,7 @@ module.exports = {
                 + "year(idk_date) as year from idk where idk_date>= ? group by month(idk_date), year(idk_date), bot_id"
                 + " order by year desc, month desc;", [dateQuery], (error, results) => {
                     if (error) {
-                        reject(error);
-                        return;
+                        return reject("Request getIDKs error");
                     }
                     accept(results);
                 });
@@ -36,8 +34,7 @@ module.exports = {
                 + "year(a.inchat_queue_date_out_ok)"
                 + " order by year desc, month desc;", [dateQuery], (error, results) => {
                     if (error) {
-                        reject(error);
-                        return;
+                        return reject("Request getSessions error");
                     }
                     accept(results);
                 });

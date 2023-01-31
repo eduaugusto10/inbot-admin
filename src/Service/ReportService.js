@@ -49,7 +49,7 @@ class ReportService {
 
             return data
         } catch (error) {
-            return 'Error'
+            return ({ message: error, statusCode: 500 })
         }
     }
 }
