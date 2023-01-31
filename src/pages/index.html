@@ -108,9 +108,11 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script>
+    const baseUrlDev = "https://hsm-dev.in.bot/api/report";
+    const baseUrlProd = "https://hsm.in.bot/api/report";
     let resp = [];
     axios
-      .get("https://hsm-dev.in.bot/api/report")
+      .get(baseUrlDev)
       .then((response) => {
         resp = response.data;
         dynamicList(response.data);
@@ -294,6 +296,7 @@
     function monthByName(monthID) {
       let date = new Date();
       let sumDate = date.getMonth() - monthID;
+      date.setDate(15);
       date.setMonth(sumDate);
       const month = date.toLocaleString("default", {
         month: "2-digit",
