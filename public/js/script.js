@@ -2,7 +2,7 @@ const baseUrlDev = "https://hsm-dev.in.bot/api/report"
 const baseUrlProd = "https://hsm.in.bot/api/report"
 let resp = [];
 axios
-    .get(baseUrlDev)
+    .get(baseUrlProd)
     .then((response) => {
         resp = response.data;
         dynamicList(response.data);
