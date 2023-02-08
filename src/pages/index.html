@@ -4,11 +4,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+      body {
+        background-color: #fafafa;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        color: #303030;
+      }
       th,
       table,
       td {
         padding: 5px;
-        border: 1px solid #000;
       }
       table {
         width: 90vw;
@@ -120,75 +124,65 @@
       .catch((error) => console.log(error));
 
     const dynamicList = (bots) => {
+      let variables = [];
       const body = document.body;
-      let color = false;
       bots.map((bot) => {
         const tableBots = document.createElement("table");
-        tableBots.style.backgroundColor =
-          color == false ? "#E0EBF6" : "#D0CECE";
-        const name = document.createElement("th");
-        const id = document.createElement("th");
-        const contract = document.createElement("th");
-        const indicator = document.createElement("th");
-        const m3 = document.createElement("th");
-        const m2 = document.createElement("th");
-        const m1 = document.createElement("th");
-        const m0 = document.createElement("th");
-        name.id = "bot-name";
-        name.innerHTML = "Nome do Projeto";
-        id.innerHTML = "Bot ID";
-        contract.innerHTML = "Tipo de Contrato";
-        indicator.innerHTML = "Indicador";
-        m3.innerHTML = monthByName(3); //"Current month - 3";
-        m2.innerHTML = monthByName(2); //"Current month - 2";
-        m1.innerHTML = monthByName(1); // "Current month - 1";
-        m0.innerHTML = monthByName(0); //"Current month";
-        tableBots.appendChild(name);
-        tableBots.appendChild(id);
-        tableBots.appendChild(contract);
-        tableBots.appendChild(indicator);
-        tableBots.appendChild(m3);
-        tableBots.appendChild(m2);
-        tableBots.appendChild(m1);
-        tableBots.appendChild(m0);
+        for (let i = 0; i < 8; i++) {
+          variables[i] = document.createElement("th");
+          variables[i].style.backgroundColor = "#ee7924";
+          variables[i].style.color = "#fff";
+        }
+        variables[0].id = "bot-name";
+        variables[7].style.borderTopRightRadius = "12px";
+        variables[0].style.borderTopLeftRadius = "12px";
+        variables[0].innerHTML = "Nome do Projeto";
+        variables[1].innerHTML = "Bot ID";
+        variables[2].innerHTML = "Tipo de Contrato";
+        variables[3].innerHTML = "Indicador";
+        variables[4].innerHTML = monthByName(3); //"Current month - 3";
+        variables[5].innerHTML = monthByName(2); //"Current month - 2";
+        variables[6].innerHTML = monthByName(1); // "Current month - 1";
+        variables[7].innerHTML = monthByName(0); //"Current month";
+        for (let i = 0; i < 8; i++) {
+          tableBots.appendChild(variables[i]);
+        }
         for (let i = 0; i < 3; i++) {
+          let content = [];
           const newCell = document.createElement("tr");
-          const botName = document.createElement("td");
-          const botID = document.createElement("td");
-          const contract = document.createElement("td");
-          const indicator = document.createElement("td");
-          const month3 = document.createElement("td");
-          const month2 = document.createElement("td");
-          const month1 = document.createElement("td");
-          const monthActual = document.createElement("td");
-          botName.innerHTML = bot.bot_name;
-          botID.innerHTML = bot.bot_id;
-          contract.innerHTML =
+          for (let j = 0; j < 8; j++) {
+            content[j] = document.createElement("td");
+            content[j].style.backgroundColor =
+              i % 2 == 0 ? "#fdfdfd" : "#eeeeee";
+          }
+          content[0].innerHTML = bot.bot_name;
+          content[1].innerHTML = bot.bot_id;
+          content[2].innerHTML =
             bot.bot_customer_contract_type == undefined
               ? "--"
               : bot.bot_customer_contract_type;
           switch (i) {
             case 0:
-              indicator.innerHTML = "Quantidade de Atendimentos Total";
-              month3.innerHTML =
+              content[3].innerHTML = "Quantidade de Atendimentos Total";
+              content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0
                   : bot.months[3].total == undefined
                   ? 0
                   : bot.months[3].total;
-              month2.innerHTML =
+              content[5].innerHTML =
                 bot.months[2] == undefined
                   ? 0
                   : bot.months[2].total == undefined
                   ? 0
                   : bot.months[2].total;
-              month1.innerHTML =
+              content[6].innerHTML =
                 bot.months[1] == undefined
                   ? 0
                   : bot.months[1].total == undefined
                   ? 0
                   : bot.months[1].total;
-              monthActual.innerHTML =
+              content[7].innerHTML =
                 bot.months[0] == undefined
                   ? 0
                   : bot.months[0].total == undefined
@@ -196,26 +190,26 @@
                   : bot.months[0].total;
               break;
             case 1:
-              indicator.innerHTML = "Quantidade de Atendimentos via Whatsapp";
-              month3.innerHTML =
+              content[3].innerHTML = "Quantidade de Atendimentos via Whatsapp";
+              content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0
                   : bot.months[3].whatsapp == undefined
                   ? 0
                   : bot.months[3].whatsapp;
-              month2.innerHTML =
+              content[5].innerHTML =
                 bot.months[2] == undefined
                   ? 0
                   : bot.months[2].whatsapp == undefined
                   ? 0
                   : bot.months[2].whatsapp;
-              month1.innerHTML =
+              content[6].innerHTML =
                 bot.months[1] == undefined
                   ? 0
                   : bot.months[1].whatsapp == undefined
                   ? 0
                   : bot.months[1].whatsapp;
-              monthActual.innerHTML =
+              content[7].innerHTML =
                 bot.months[0] == undefined
                   ? 0
                   : bot.months[0].whatsapp == undefined
@@ -223,26 +217,26 @@
                   : bot.months[0].whatsapp;
               break;
             case 2:
-              indicator.innerHTML = "Quantidade de IDKs";
-              month3.innerHTML =
+              content[3].innerHTML = "Quantidade de IDKs";
+              content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0
                   : bot.months[3].idk == undefined
                   ? 0
                   : bot.months[3].idk;
-              month2.innerHTML =
+              content[5].innerHTML =
                 bot.months[2] == undefined
                   ? 0
                   : bot.months[2].idk == undefined
                   ? 0
                   : bot.months[2].idk;
-              month1.innerHTML =
+              content[6].innerHTML =
                 bot.months[1] == undefined
                   ? 0
                   : bot.months[1].idk == undefined
                   ? 0
                   : bot.months[1].idk;
-              monthActual.innerHTML =
+              content[7].innerHTML =
                 bot.months[0] == undefined
                   ? 0
                   : bot.months[0].idk == undefined
@@ -251,17 +245,11 @@
               break;
           }
           tableBots.appendChild(newCell);
-          newCell.appendChild(botName);
-          newCell.appendChild(botID);
-          newCell.appendChild(contract);
-          newCell.appendChild(indicator);
-          newCell.appendChild(month3);
-          newCell.appendChild(month2);
-          newCell.appendChild(month1);
-          newCell.appendChild(monthActual);
+          for (let w = 0; w < 8; w++) {
+            newCell.appendChild(content[w]);
+          }
           body.appendChild(tableBots);
         }
-        color = ~color;
       });
     };
     function search() {

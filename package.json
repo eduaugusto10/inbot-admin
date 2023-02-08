@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js",
-    "prod": "node ./src/server.js"
+    "prod": "node ./src/server.js",
+    "test": "jest"
   },
   "author": "Eduardo Augusto Gomes de Oliveira",
   "license": "ISC",
@@ -17,6 +17,10 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
+    "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "jest": "^29.4.1",
     "nodemon": "^2.0.20"
   }
 }
