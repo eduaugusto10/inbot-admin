@@ -134,7 +134,6 @@
           variables[i].style.color = "#fff";
         }
         variables[0].id = "bot-name";
-        variables[7].style.borderTopRightRadius = "12px";
         variables[0].style.borderTopLeftRadius = "12px";
         variables[0].innerHTML = "Nome do Projeto";
         variables[1].innerHTML = "Bot ID";
@@ -144,6 +143,7 @@
         variables[5].innerHTML = monthByName(2); //"Current month - 2";
         variables[6].innerHTML = monthByName(1); // "Current month - 1";
         variables[7].innerHTML = monthByName(0); //"Current month";
+        variables[7].style.borderTopRightRadius = "12px";
         for (let i = 0; i < 8; i++) {
           tableBots.appendChild(variables[i]);
         }
@@ -254,11 +254,8 @@
     };
     function search() {
       let obj = resp;
-
       obj = statusBot(obj);
-
       obj = subscribers(obj);
-
       removeChild();
       obj = newQuery(obj);
       dynamicList(obj);
