@@ -113,14 +113,16 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script>
-    const baseUrlDev = "https://hsm-dev.in.bot/api/report";
+    // const baseUrlDev = "https://hsm-dev.in.bot/api/report";
     const baseUrlProd = "https://hsm.in.bot/table-pme/report";
+    // const baseUrlProd = "http://localhost:3000/report";
     let resp = [];
     axios
       .get(baseUrlProd)
       .then((response) => {
         resp = response.data;
         dynamicList(response.data);
+        console.log(response.data);
       })
       .catch((error) => console.log(error));
 
@@ -148,7 +150,7 @@
         for (let i = 0; i < 8; i++) {
           tableBots.appendChild(variables[i]);
         }
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
           let content = [];
           const newCell = document.createElement("tr");
           for (let j = 0; j < 8; j++) {
@@ -243,6 +245,33 @@
                   : bot.months[0].idk == undefined
                   ? 0
                   : bot.months[0].idk;
+              break;
+            case 3:
+              content[3].innerHTML = "Quantidade de fichas aprovadas";
+              content[4].innerHTML =
+                bot.months[3] == undefined
+                  ? 0
+                  : bot.months[3].fichas == undefined
+                  ? 0
+                  : bot.months[3].fichas;
+              content[5].innerHTML =
+                bot.months[2] == undefined
+                  ? 0
+                  : bot.months[2].fichas == undefined
+                  ? 0
+                  : bot.months[2].fichas;
+              content[6].innerHTML =
+                bot.months[1] == undefined
+                  ? 0
+                  : bot.months[1].fichas == undefined
+                  ? 0
+                  : bot.months[1].fichas;
+              content[7].innerHTML =
+                bot.months[0] == undefined
+                  ? 0
+                  : bot.months[0].fichas == undefined
+                  ? 0
+                  : bot.months[0].fichas;
               break;
           }
           tableBots.appendChild(newCell);

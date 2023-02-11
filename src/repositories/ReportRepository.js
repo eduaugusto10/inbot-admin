@@ -29,12 +29,26 @@ module.exports = {
     getSessions: (dateQuery) => {
         return new Promise((accept, reject) => {
             db.query("select a.bot_id, count(a.bot_id) as total,count(if(a.log_channel='whatsapp',a.bot_id,null)) as whatsapp,"
-                + "month(a.inchat_queue_date_out_ok) as month,year(a.inchat_queue_date_out_ok) as year from inchat_sessions a "
-                + "where a.inchat_queue_date_out_ok>= ? group by a.bot_id, month(a.inchat_queue_date_out_ok),"
-                + "year(a.inchat_queue_date_out_ok)"
+                + "month(a.session_date_start) as month,year(a.session_date_start) as year from sessions a "
+                + "where a.session_date_start>= ? and bot_server_type='production' group by a.bot_id, month(a.session_date_start),"
+                + "year(a.session_date_start)"
                 + " order by year desc, month desc;", [dateQuery], (error, results) => {
                     if (error) {
                         return reject("Request getSessions error");
+                    }
+                    accept(results);
+                });
+        })
+    },
+    getFichas: (dateQuery) => {
+        return new Promise((accept, reject) => {
+            db.query("select a.bot_id, count(ficha_id) as fichas,"
+                + "month(a.ficha_date_creation) as month,year(a.ficha_date_creation) as year from fichas a "
+                + "where a.ficha_status='ok' AND a.ficha_date_creation>= ? group by a.bot_id, month(a.ficha_date_creation),"
+                + "year(a.ficha_date_creation)"
+                + "order by year desc, month desc;", [dateQuery], (error, results) => {
+                    if (error) {
+                        return reject("Request getFichas error");
                     }
                     accept(results);
                 });
