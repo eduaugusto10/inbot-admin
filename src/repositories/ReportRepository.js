@@ -17,7 +17,7 @@ module.exports = {
     getIDKs: (dateQuery) => {
         return new Promise((accept, reject) => {
             db.query("select bot_id, count(bot_id) as idk, month(idk_date) as month,"
-                + "year(idk_date) as year from idk where idk_date>= ? group by month(idk_date), year(idk_date), bot_id"
+                + "year(idk_date) as year from idk where idk_date>= ? and bot_server_type='production' group by month(idk_date), year(idk_date), bot_id"
                 + " order by year desc, month desc;", [dateQuery], (error, results) => {
                     if (error) {
                         return reject("Request getIDKs error");
