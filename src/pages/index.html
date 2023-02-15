@@ -8,7 +8,10 @@
         background-color: #fafafa;
         font-family: "Segoe UI", Arial, Helvetica, sans-serif;
         color: #303030;
+        padding: 0px;
+        margin: 0px;
       }
+
       th,
       table,
       td {
@@ -16,14 +19,37 @@
       }
       table {
         width: 90vw;
+        margin: 10px 0px 0px 30px;
       }
       input {
         margin: 0.4em;
+      }
+      img {
+        padding: 13px 0px 0px 11px;
+      }
+      #logo {
+        display: block;
+        width: 100vw;
+        height: 61px;
+        padding: 0px 0px 0px 12px;
+        background-color: #fff;
+        border-bottom: 1px solid #d0d0d0;
+      }
+      #project-name {
+        background-color: #ffffff;
+        height: 58px;
+        line-height: 58px;
+        display: inline-block;
+        padding-left: 12px;
+        font-size: 1.1em;
       }
       #input-search {
         width: 25em;
         height: 3em;
         padding-left: 8px;
+      }
+      #container {
+        margin: 10px 0px 0px 30px;
       }
       #bot-name {
         width: 300px;
@@ -37,81 +63,93 @@
     <title>Inbot</title>
   </head>
   <body>
-    <b>
-      <a href="https://in.bot/inbot-admin">← VOLTAR</a>
-    </b>
-    <h2>Relatório para Gestão da Operação PME</h2>
-    <div id="search-container">
-      <fieldset>
-        <legend>Procurar</legend>
-        <input
-          type="text"
-          id="input-search"
-          onkeyup="search()"
-          placeholder="Digite o nome ou id"
+    <div id="logo">
+      <div id="project-name">
+        <img
+          src="https://in.bot/images/logotipo/logo-menu-inbot.svg"
+          alt="InBot logo"
+          width="118"
+          height="36"
         />
-        <form>
+      </div>
+    </div>
+    <div id="container">
+      <b>
+        <a href="https://in.bot/inbot-admin">← VOLTAR</a>
+      </b>
+      <h2>Relatório para Gestão da Operação PME</h2>
+      <div id="search-container">
+        <fieldset>
+          <legend>Procurar</legend>
           <input
-            id="project-radio"
-            type="radio"
-            name="search-radio"
-            checked
-            onclick="search()"
-          /><label>Nome do Projeto</label>
-          <input
-            id="bot-id-radio"
-            type="radio"
-            name="search-radio"
-            onclick="search()"
-          /><label>Bot ID</label>
-        </form>
-      </fieldset>
-      <fieldset>
-        <legend>Status do bot</legend>
-        <div>
-          <div>
+            type="text"
+            id="input-search"
+            onkeyup="search()"
+            placeholder="Digite o nome ou id"
+          />
+          <form>
             <input
-              type="checkbox"
-              id="bot-enable"
+              id="project-radio"
+              type="radio"
+              name="search-radio"
+              checked
               onclick="search()"
-              checked="checked"
-            />
-            <label>Ativo</label>
-          </div>
-          <div>
+            /><label>Nome do Projeto</label>
             <input
-              type="checkbox"
-              id="bot-disable"
+              id="bot-id-radio"
+              type="radio"
+              name="search-radio"
               onclick="search()"
-              checked="checked"
-            />
-            <label>Inativo</label>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Assinante</legend>
-        <div>
+            /><label>Bot ID</label>
+          </form>
+        </fieldset>
+        <fieldset>
+          <legend>Status do bot</legend>
           <div>
-            <input
-              type="checkbox"
-              id="subscriber"
-              onclick="search()"
-              checked="checked"
-            />
-            <label>Sim</label>
+            <div>
+              <input
+                type="checkbox"
+                id="bot-enable"
+                onclick="search()"
+                checked="checked"
+              />
+              <label>Ativo</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="bot-disable"
+                onclick="search()"
+                checked="checked"
+              />
+              <label>Inativo</label>
+            </div>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>Assinante</legend>
           <div>
-            <input
-              type="checkbox"
-              id="non-subscriber"
-              onclick="search()"
-              checked="checked"
-            />
-            <label>Não</label>
+            <div>
+              <input
+                type="checkbox"
+                id="subscriber"
+                onclick="search()"
+                checked="checked"
+              />
+              <label>Sim</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="non-subscriber"
+                onclick="search()"
+                checked="checked"
+              />
+              <label>Não</label>
+            </div>
           </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
