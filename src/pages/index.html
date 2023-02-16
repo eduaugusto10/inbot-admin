@@ -100,12 +100,7 @@
               <label>Ativo</label>
             </div>
             <div>
-              <input
-                type="checkbox"
-                id="bot-disable"
-                onclick="search()"
-                checked="checked"
-              />
+              <input type="checkbox" id="bot-disable" onclick="search()" />
               <label>Inativo</label>
             </div>
           </div>
@@ -123,12 +118,7 @@
               <label>Sim</label>
             </div>
             <div>
-              <input
-                type="checkbox"
-                id="non-subscriber"
-                onclick="search()"
-                checked="checked"
-              />
+              <input type="checkbox" id="non-subscriber" onclick="search()" />
               <label>Não</label>
             </div>
           </div>
@@ -147,6 +137,7 @@
       .then((response) => {
         resp = response.data;
         dynamicList(response.data);
+        search();
         console.log(response.data);
       })
       .catch((error) => console.log(error));
