@@ -138,7 +138,7 @@
         resp = response.data;
         dynamicList(response.data);
         search();
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => console.log(error));
 
@@ -166,7 +166,7 @@
         for (let i = 0; i < 8; i++) {
           tableBots.appendChild(variables[i]);
         }
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
           let content = [];
           const newCell = document.createElement("tr");
           for (let j = 0; j < 8; j++) {
@@ -182,7 +182,7 @@
               : bot.bot_customer_contract_type;
           switch (i) {
             case 0:
-              content[3].innerHTML = "Quantidade de Atendimentos Total";
+              content[3].innerHTML = "Quantidade de atendimentos total (bot)";
               content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0
@@ -209,7 +209,7 @@
                   : bot.months[0].total;
               break;
             case 1:
-              content[3].innerHTML = "Quantidade de Atendimentos via Whatsapp";
+              content[3].innerHTML = "Quantidade de atendimentos via whatsapp";
               content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0
@@ -236,7 +236,35 @@
                   : bot.months[0].whatsapp;
               break;
             case 2:
-              content[3].innerHTML = "Quantidade de IDKs";
+              content[3].innerHTML =
+                "Quantidade de atendimentos inchat (humano)";
+              content[4].innerHTML =
+                bot.months[3] == undefined
+                  ? 0
+                  : bot.months[3].inchat == undefined
+                  ? 0
+                  : bot.months[3].inchat;
+              content[5].innerHTML =
+                bot.months[2] == undefined
+                  ? 0
+                  : bot.months[2].inchat == undefined
+                  ? 0
+                  : bot.months[2].inchat;
+              content[6].innerHTML =
+                bot.months[1] == undefined
+                  ? 0
+                  : bot.months[1].inchat == undefined
+                  ? 0
+                  : bot.months[1].inchat;
+              content[7].innerHTML =
+                bot.months[0] == undefined
+                  ? 0
+                  : bot.months[0].inchat == undefined
+                  ? 0
+                  : bot.months[0].inchat;
+              break;
+            case 3:
+              content[3].innerHTML = "Quantidade de IDK";
               content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0
@@ -262,8 +290,8 @@
                   ? 0
                   : bot.months[0].idk;
               break;
-            case 3:
-              content[3].innerHTML = "Quantidade de fichas aprovadas";
+            case 4:
+              content[3].innerHTML = "Quantidade de fichas criadas e aprovadas";
               content[4].innerHTML =
                 bot.months[3] == undefined
                   ? 0

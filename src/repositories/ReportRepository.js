@@ -31,8 +31,20 @@ module.exports = {
             db.query("select a.bot_id, count(a.bot_id) as total,count(if(a.log_channel='whatsapp',a.bot_id,null)) as whatsapp,"
                 + "month(a.session_date_start) as month,year(a.session_date_start) as year from sessions a "
                 + "where a.session_date_start>= ? and bot_server_type='production' group by a.bot_id, month(a.session_date_start),"
-                + "year(a.session_date_start)"
-                + " order by year desc, month desc;", [dateQuery], (error, results) => {
+                + "year(a.session_date_start) order by year desc, month desc;", [dateQuery], (error, results) => {
+                    if (error) {
+                        return reject("Request getSessions error");
+                    }
+                    accept(results);
+                });
+        })
+    },
+    getInchat: (dateQuery) => {
+        return new Promise((accept, reject) => {
+            db.query("select bot_id, count(bot_id) as inchat, month(inchat_queue_date_out_ok) as month, "
+                + "year(inchat_queue_date_out_ok) as year from inchat_sessions where inchat_server_type='production' "
+                + "and inchat_queue_date_out_ok is not NULL and inchat_queue_date_out_ok>=? "
+                + "group by bot_id, month, year;", [dateQuery], (error, results) => {
                     if (error) {
                         return reject("Request getSessions error");
                     }

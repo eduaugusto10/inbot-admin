@@ -6,7 +6,6 @@ class ReportController {
         try {
             const data = await reportService.getAll()
             if (data.statusCode == 500) {
-                console.log(data)
                 res.status(500).json(data)
             }
             res.json(data)
